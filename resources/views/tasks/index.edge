@@ -1,0 +1,24 @@
+@layout('layout.app')
+
+@section('content')
+  @set('title', 'TASKPOSTR')
+
+  {{--
+    Looping over all tasks.
+    Change this section into a landing page
+
+    ref: http://edge.adonisjs.com/docs/iteration
+    --}}
+  @loggedIn
+    @each(task in tasks, include = 'tasks.partials.task-card')
+    @else
+      @component('components.alert', { color: 'info' })
+        <p class="text-sm">Yay, you have no task!</p>
+      @endcomponent
+    @endeach
+  @else
+    @component('components.alert', { color: 'info' })
+      <p class="text-sm">You need to be logged in to manage your tasks.</p>
+    @endcomponent
+  @endloggedIn
+@endsection

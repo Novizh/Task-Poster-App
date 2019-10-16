@@ -1,0 +1,26 @@
+@layout('layout.app')
+
+@section('content')
+  @set('title', 'TASKPOSTR ')
+
+  <div class="flex flex-col items-center">
+    <form class="bg-white w-3/5 shadow-md rounded px-8 pt-6 pb-8 mb-4" action="/tasks/{{ task.id }}?_method=PUT" method="POST">
+
+      {{--
+        We are here checking if the key 'error' is in the session.
+        If it is it means that our validation fails.
+
+        ref: http://adonisjs.com/docs/4.0/sessions#_view_helpers
+        ref: http://edge.adonisjs.com/docs/conditionals#_if
+        --}}
+      @if(flashMessage('error'))
+        @component('components.alert', { type: 'danger', dismissible: true })
+          {{ flashMessage('error') }}
+        @endcomponent
+      @endif
+
+      @include('tasks.partials.form')
+
+    </div>
+  </div>
+@endsection

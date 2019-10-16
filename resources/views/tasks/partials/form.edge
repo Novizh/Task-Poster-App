@@ -1,0 +1,38 @@
+{{--
+  AdonisJs provides CSRF Protection by default.
+  This mean that we need to send a csrf token for every POST, PUT or DELETE request.
+
+  ref: http://adonisjs.com/docs/4.0/csrf
+  --}}
+{{ csrfField() }}
+
+{{-- Title Field --}}
+<div class="mb-8">
+  @!component('components.label', { text: 'Title', related: 'title' })
+  @!component('components.input', { name: 'title', value: old('title', task.title || ''), required: true })
+  <div>
+    {{ elIf('<small class="text-xs">$self</small>', getErrorFor('title'), hasErrorFor('title')) }}
+  </div>
+</div>
+
+{{-- Description Field --}}
+<div class="mb-8">
+  @!component('components.label', { text: 'Description', related: 'description' })
+  @!component('components.textarea', { name: 'description', value: old('description', task.description || '') })
+  <div>
+    {{ elIf('<small class="form-text">$self</small>', getErrorFor('description'), hasErrorFor('description')) }}
+  </div>
+</div>
+
+{{-- Status Field --}}
+<div class="mb-8">
+  @!component('components.label', { text: 'Status', related: 'status' })
+  @!component('components.dropdown', { name: 'status', value: old('status', task.status || ''), required: true })
+  <div>
+    {{ elIf('<small class="form-text">$self</small>', getErrorFor('status'), hasErrorFor('status')) }}
+  </div>
+</div>
+
+<button class="bg-brand hover:bg-brand-dark text-white py-2 px-4 rounded">
+  Save
+</button>
